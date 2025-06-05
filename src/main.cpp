@@ -30,8 +30,13 @@
 	void loop() {
 		digitalWrite(ir_led, HIGH); // Turn on IR LED
 		delay(100); // Wait for 100 milliseconds
+		display.clearDisplay();
 		if (digitalRead(ir_sens) == LOW) { // ir sensor is LOW when triggered
+			display.println("IR Sensor Triggered!");
 			digitalWrite(green_led, HIGH);
 		}
-		else {digitalWrite(green_led, LOW);}
+		else {
+			display.println("IR Sensor NOT Triggered");
+			digitalWrite(green_led, LOW);
+		}
 	}
