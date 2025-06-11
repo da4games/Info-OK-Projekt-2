@@ -1,24 +1,24 @@
-#include <Arduino.h>
-#include <pins.h>
-#include <startup.h>
+#include <Arduino.h> // Include Arduino library for basic functions
+#include <pins.h> // custom pins
+#include <startup.h> // custom startup class
 
 //display libs
-#include <Adafruit_GFX.h>
-#include <Adafruit_SSD1331.h>
-#include <SPI.h>
+#include <Adafruit_GFX.h> // to render sapes and text
+#include <Adafruit_SSD1331.h> // SSD1331 OLED display driver library
+#include <SPI.h> // SPI library for communication with the display
 
 // Define SPI pins for SSD1331
-#define SCLK 13
-#define MOSI 11
-#define CS   10
-#define DC   8
-#define RST  9
+#define SCLK 13 // SPI clock pin HAS TO BE PIN 13 ON ARDUINO UNO
+#define MOSI 11 // SPI data pin HAS TO BE PIN 11 ON ARDUINO UNO
+#define CS   10 // Chip select pin for the display
+#define DC   8 // Data/Command pin for the display
+#define RST  9 // Reset pin for the display
 
 // Screen dimensions
 #define SCREEN_WIDTH 96
 #define SCREEN_HEIGHT 64
 
-Adafruit_SSD1331 display = Adafruit_SSD1331(CS, DC, RST);
+Adafruit_SSD1331 display = Adafruit_SSD1331(CS, DC, RST); // Create an instance of the display
 
 unsigned long sensor1TriggerTime = 0;
 unsigned long sensor2TriggerTime = 0;
@@ -31,63 +31,20 @@ void setup() {
 	display.begin(); // Initialize SSD1331
 	display.fillScreen(0x0000); // Clear screen to black for color display
 	display.setTextSize(1);
-	display.setTextColor(0xFFFF); // Use SSD1331 color (e.g., WHITE)
-	display.setCursor(0, 0);
-	display.println("Starting...");
-    int size = sizeof(pins) / sizeof(pins[0]);
-    Startup startup(pins, modes, size);
+	display.setTextColor(0xFFFF); // white in hexadecimal
+	display.setCursor(0, 0); // need to set crusor position before printing
+	display.println("Starting..."); // prints just like Serial.println
+
+    int size = sizeof(pins) / sizeof(pins[0]); // calculate the size of the pins array
+    Startup startup(pins, modes, size); // initialise custom startup class with pins and modes
     startup.boot(); // Call the boot method
-
-	// display tests
-
-	digitalWrite(RST, LOW);  // Assert RESET (if RES pin is used)
-	delay(100);
-	digitalWrite(RST, HIGH); // Release RESET
-	delay(100);
-
-	// Send CLEAR command (0x25) for full screen (columns 0-95, rows 0-63)
-	display.writeCommand(0x25);
-	display.writeData(0x00);  // Start column
-	display.writeData(0x00);  // Start row
-	display.writeData(0x5F);  // End column (95 = 0x5F)
-	display.writeData(0x3F);  // End row (63 = 0x3F)
-	delay(10);        // Wait for command execution
-
-	display.fillScreen(0x0000); // Clear screen to black
-	display.setTextSize(1);
-	display.drawCircle(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 30, 0xFFFF); // Draw a white circle
-	delay(2000); // Wait for 1 second
-	display.fillScreen(0x0000); // Clear screen to black again
-	display.setTextColor(0x051e); //blue
-	display.println("Screen test :D");
-}
+	}
 
 unsigned long messageStartTime = 0;
 bool messageActive = false;
 String messageToShow = "";
 
-void loop() {
-	/*
-	while (true) {//debuging
-		if (digitalRead(ir_sens1) == HIGH) {
-			Serial.println("IR Sensor 1 not triggered");
-			//digitalWrite(green_led, HIGH); // Turn on green LED
-		}
-		else {
-			Serial.println("IR Sensor 1 triggered");
-			//digitalWrite(green_led, LOW); // Turn off green LED
-		}
-		if (digitalRead(ir_sens2) == HIGH) {
-			digitalWrite(green_led, HIGH); // Turn off green LED
-			//Serial.println("IR Sensor 2 not triggered");
-		}
-		else {
-			digitalWrite(green_led, LOW); // Turn on green LED
-			//Serial.println("IR Sensor 2 triggered");
-			}
-  	}//debuging
-	*/
-	
+void loop() {	
 	unsigned long now = millis();
 
   	// Sensor 1 triggered
