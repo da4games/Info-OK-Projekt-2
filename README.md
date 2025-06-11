@@ -1,4 +1,4 @@
-# Info-OK Projekt 3
+# Info-OK Projekt 2
 
 ## Plan:
 - Lichtschrnaken zur Bestimmung der Flugrichtung verwenden
