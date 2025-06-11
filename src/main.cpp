@@ -120,7 +120,7 @@ void loop() {
 	// Show "No movement" only if no message is currently active
 	if (!messageActive && movementState == 0) {
 		display.fillRect(0, 0, SCREEN_WIDTH, 8, 0x0000);
-	  	messageToShow = "No movement";
+	  	messageToShow = "Keine Bewegung";
 	  	display.setCursor(0, 0);
 	  	display.setTextColor(0xFFFF);
 	  	display.println(messageToShow);
