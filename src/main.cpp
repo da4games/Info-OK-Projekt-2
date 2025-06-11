@@ -99,7 +99,7 @@ void loop() {
 	if (last_birds != birds) { // Only update the display if the number of birds has changed
 		display.fillRect(0, 8, SCREEN_WIDTH, 8, 0x0000); // Clear the area for the inmate count
 		display.setCursor(0, 8);
-		display.println("Vögel: " + String(birds)); // Display the number of birds
+		display.println("Voegel: " + String(birds)); // Display the number of birds
 		last_birds = birds;
 	}
 

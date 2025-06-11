@@ -10,3 +10,6 @@
 - in den erste Wochen Plan machen
 - am 10.6. sind die Lichtschranken und das Display gekommen
 - den gesammten 11.6. in Zusammenarbeit in der MINT-Garage die Teile zusammen stecken und programmieren
+
+## Auch Wichtig
+fast alle Dateien bis auf die in src und lib sind durch GitHub oder PlatformIo generiert worden.
