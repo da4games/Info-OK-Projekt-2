@@ -99,13 +99,13 @@ void loop() {
 	if (last_birds != birds) { // Only update the display if the number of birds has changed
 		display.fillRect(0, 8, SCREEN_WIDTH, 8, 0x0000); // Clear the area for the inmate count
 		display.setCursor(0, 8);
-		display.println("birds: " + String(birds)); // Display the number of birds
+		display.println("Vögel: " + String(birds)); // Display the number of birds
 		last_birds = birds;
 	}
 
   	// Check for new movement and interrupt "No movement" if needed
 	if ((movementState == 1 || movementState == 2) &&
-	    (!messageActive || messageToShow == "No movement")) {
+	    (!messageActive || messageToShow == "Keine Bewegung")) {
 			display.fillRect(0, 0, SCREEN_WIDTH, 8, 0x0000);
 	  	// Interrupt current message if it's just "No movement"
 	  	messageToShow = (movementState == 1) ? "1 --> 2" : "2 --> 1";
