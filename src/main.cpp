@@ -75,6 +75,7 @@ void loop() {
 	  	display.fillScreen(0x0000);
 	  	display.setCursor(0, 0);
 	  	display.setTextColor(0xFFFF);
+		Serial.println(messageToShow); // Print to Serial for debugging
 	  	display.println(messageToShow);
 	  	messageStartTime = now;
 	  	messageActive = true;
@@ -94,6 +95,7 @@ void loop() {
   	// Clear message after 1 second
   	if (messageActive && (now - messageStartTime > 1000)) {
   	  	display.fillScreen(0x0000);
+		digitalWrite(green_led, LOW); // Turn off the green LED
   	  	messageActive = false;
   	}
 
